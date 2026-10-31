@@ -28,8 +28,8 @@ export default function Contact() {
         <div>
           <h2>Vamos conversar?</h2>
           <p>
-            Estou aberto a vagas de desenvolvedor júnior, remotas ou híbridas em Feira de Santana. Respondo rápido por
-            e-mail ou LinkedIn.
+            Estou aberto a vagas de desenvolvedor júnior, remotas ou presenciais e híbridas no Sul. Estou me mudando para
+            Santa Catarina. Respondo rápido por e-mail ou LinkedIn.
           </p>
         </div>
         <div className="mailbox">

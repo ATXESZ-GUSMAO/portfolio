@@ -23,11 +23,11 @@ export const contact = {
 }
 
 export const whoami: [string, string][] = [
-  ['local', 'Feira de Santana, BA'],
+  ['local', 'Mudando para Santa Catarina'],
   ['formação', 'Análise e Desenv. de Sistemas'],
   ['foco', 'Backend · APIs REST · Full-stack'],
   ['linguagens', 'TypeScript, Python'],
-  ['modelo', 'Remoto · híbrido em FSA'],
+  ['modelo', 'Remoto · presencial no Sul'],
   ['mudança', 'Disponível'],
 ]
 
