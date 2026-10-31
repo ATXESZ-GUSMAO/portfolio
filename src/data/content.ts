@@ -7,7 +7,7 @@ export interface Project {
   summary: string
   highlights: string[]
   stack: string[]
-  link?: { label: string; href: string }
+  links?: { label: string; href: string }[]
 }
 
 export const statusLabel: Record<ProjectStatus, string> = {
@@ -67,7 +67,7 @@ export const projects: Project[] = [
       'Estrutura de captação de leads integrada a um CRM próprio.',
     ],
     stack: ['Next.js', 'React', 'TypeScript'],
-    link: { label: 'fortiuscorp.com.br', href: 'https://fortiuscorp.com.br' },
+    links: [{ label: 'fortiuscorp.com.br', href: 'https://fortiuscorp.com.br' }],
   },
   {
     name: 'Site ATXES Studios',
@@ -80,7 +80,7 @@ export const projects: Project[] = [
       'Deploy na Vercel com domínio próprio configurado.',
     ],
     stack: ['React', 'Vite', 'TypeScript', 'Framer Motion', 'Vercel'],
-    link: { label: 'atxes.com.br', href: 'https://atxes.com.br' },
+    links: [{ label: 'atxes.com.br', href: 'https://atxes.com.br' }],
   },
   {
     name: 'Wake Line',
@@ -92,6 +92,14 @@ export const projects: Project[] = [
       'Direção técnica, implementação e organização das sprints de uma equipe de quatro pessoas.',
     ],
     stack: ['Godot 4', 'Unity', 'C#', 'ClickUp'],
+    links: [
+      { label: 'ATXES Entertainment', href: 'https://www.atxes.com.br/entertainment' },
+      { label: 'Página do jogo', href: 'https://www.atxes.com.br/entertainment/wake-line' },
+      { label: 'Instagram', href: 'https://www.instagram.com/atxes.entertainment' },
+      { label: 'X', href: 'https://x.com/atxesent' },
+      { label: 'TikTok', href: 'https://www.tiktok.com/@atxesntertainment' },
+      { label: 'YouTube', href: 'https://youtube.com/@atxesentertainment' },
+    ],
   },
 ]
 

@@ -30,10 +30,14 @@ export default function Projects() {
                 <span key={s}>{s}</span>
               ))}
             </div>
-            {p.link && (
-              <a className="link" href={p.link.href} target="_blank" rel="noopener">
-                {p.link.label} ↗
-              </a>
+            {p.links && (
+              <div className="links-row">
+                {p.links.map((l) => (
+                  <a key={l.href} className="link" href={l.href} target="_blank" rel="noopener">
+                    {l.label} ↗
+                  </a>
+                ))}
+              </div>
             )}
           </div>
         </article>

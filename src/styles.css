@@ -78,7 +78,8 @@ section{padding-block:56px;border-top:1px solid var(--line)}
 .project li::marker{color:var(--accent)}
 .stack{display:flex;flex-wrap:wrap;gap:6px;margin-top:18px}
 .stack span{font-family:var(--font-mono);font-size:12.5px;border:1px solid var(--line);padding:3px 9px;border-radius:6px;color:var(--ink)}
-.project .link{display:inline-block;margin-top:16px;font-weight:600;font-size:15px}
+.links-row{display:flex;flex-wrap:wrap;gap:8px 20px;margin-top:16px}
+.project .link{display:inline-block;font-weight:600;font-size:15px}
 
 /* stack */
 .skills{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:28px}
