@@ -4,7 +4,10 @@ export default function Hero() {
   return (
     <div className="hero">
       <div>
-        <p className="eyebrow">Portfólio · {new Date().getFullYear()}</p>
+        <div className="intro">
+          <img className="avatar" src="/lucas.jpg" alt="Foto de Lucas Gusmão" width="88" height="88" />
+          <p className="eyebrow">Portfólio · {new Date().getFullYear()}</p>
+        </div>
         <h1>
           Lucas
           <br />
