@@ -1,22 +1,27 @@
-import Header from './components/Header.tsx'
-import Hero from './components/Hero.tsx'
-import Projects from './components/Projects.tsx'
-import Skills from './components/Skills.tsx'
-import Experience from './components/Experience.tsx'
+import About from './components/About.tsx'
 import Contact from './components/Contact.tsx'
+import Footer from './components/Footer.tsx'
+import Hero from './components/Hero.tsx'
+import Nav from './components/Nav.tsx'
+import Work from './components/Work.tsx'
+import { useReveal } from './hooks/useReveal.ts'
 
 export default function App() {
+  useReveal()
   return (
-    <div className="wrap">
-      <Header />
-      <main id="inicio">
+    <>
+      <a className="skip" href="#conteudo">
+        Pular para o conteúdo
+      </a>
+      <div className="page-bg" aria-hidden="true" />
+      <Nav />
+      <main id="conteudo" tabIndex={-1}>
         <Hero />
-        <Projects />
-        <Skills />
-        <Experience />
+        <Work />
+        <About />
         <Contact />
       </main>
-      <footer>Lucas Gabriel Gusmão · {new Date().getFullYear()}</footer>
-    </div>
+      <Footer />
+    </>
   )
 }

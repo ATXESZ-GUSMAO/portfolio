@@ -7,7 +7,11 @@ export interface Project {
   summary: string
   highlights: string[]
   stack: string[]
+  featured?: boolean
+  specs?: [string, string][]
   links?: { label: string; href: string }[]
+  /** Links exibidos como ícones (redes sociais do projeto). */
+  socials?: { label: string; href: string }[]
 }
 
 export const statusLabel: Record<ProjectStatus, string> = {
@@ -16,32 +20,49 @@ export const statusLabel: Record<ProjectStatus, string> = {
   wip: 'em desenvolvimento',
 }
 
+export const profile = {
+  name: 'Lucas Gusmão',
+  fullName: 'Lucas Gabriel Gusmão',
+  role: 'Backend & Full-Stack',
+  headline: { before: 'Do modelo de dados ao', accent: 'deploy', after: '.' },
+  lead: 'Crio APIs, sistemas internos e automações com TypeScript, Node.js e Python. Fundador da ATXES Studios, onde construo produtos próprios e projetos para clientes já em uso.',
+  availability: 'Aberto a vagas júnior',
+  location: 'SC / remoto',
+  workModel: 'Remoto · híbrido · presencial no Sul',
+  move: 'De mudança para Santa Catarina.',
+  bio: 'Fundei e lidero a parte técnica da ATXES Studios. Desenvolvo APIs, sistemas internos, bots, sites para clientes e um jogo. Também cuido do contato com clientes e do planejamento das sprints.',
+}
+
 export const contact = {
   email: 'devgusmao1@gmail.com',
   linkedin: 'https://linkedin.com/in/lucasgabrielgusmao',
   github: 'https://github.com/ATXESZ-GUSMAO',
+  instagram: {
+    handle: 'guzd3v',
+    href: 'https://www.instagram.com/guzd3v',
+  },
 }
-
-export const whoami: [string, string][] = [
-  ['local', 'Mudando para Santa Catarina'],
-  ['formação', 'Análise e Desenv. de Sistemas'],
-  ['foco', 'Backend · APIs REST · Full-stack'],
-  ['linguagens', 'TypeScript, Python'],
-  ['modelo', 'Remoto · presencial no Sul'],
-  ['mudança', 'Disponível'],
-]
 
 export const projects: Project[] = [
   {
     name: 'ATXES Vault',
     area: 'Backend · Segurança',
     status: 'lock',
-    summary: 'Sistema interno para guardar documentos da empresa e controlar quem acessa cada um.',
+    featured: true,
+    summary: 'Cofre digital da empresa: centraliza documentos sensíveis e controla, com auditoria, quem acessa cada um.',
     highlights: [
-      'Login com autenticação em dois fatores (TOTP).',
-      'Permissões hierárquicas por módulo, para cada pessoa ver só o que precisa.',
-      'Campos sensíveis criptografados no banco e log de auditoria de todas as ações.',
-      'Upload e download de arquivos no Cloudflare R2, com testes de interface em Playwright.',
+      'Autenticação em dois fatores (TOTP) para todo o time.',
+      'Permissões hierárquicas por módulo, desenhadas pelo princípio do menor privilégio.',
+      'Criptografia de campos sensíveis no PostgreSQL e log de auditoria de todas as ações.',
+      'Armazenamento de arquivos no Cloudflare R2 e testes end-to-end com Playwright.',
+    ],
+    specs: [
+      ['auth', 'TOTP 2FA'],
+      ['rbac', 'hierárquico por módulo'],
+      ['db', 'PostgreSQL · campos criptografados'],
+      ['storage', 'Cloudflare R2'],
+      ['audit', 'log de todas as ações'],
+      ['tests', 'Playwright E2E'],
     ],
     stack: ['Node.js', 'TypeScript', 'Express', 'PostgreSQL', 'React', 'Tailwind', 'Playwright', 'Cloudflare R2'],
   },
@@ -49,23 +70,16 @@ export const projects: Project[] = [
     name: 'TaskBot',
     area: 'Backend · Automação',
     status: 'lock',
-    summary: 'Bot no Telegram para distribuir e acompanhar tarefas da equipe sem sair do chat.',
-    highlights: [
-      'Controle de acesso por papéis: administradores criam e atribuem, integrantes recebem e atualizam.',
-      'Persistência em SQLite e comandos assíncronos com python-telegram-bot.',
-      'Usado no dia a dia pelas equipes de desenvolvimento e de jogos da empresa.',
-    ],
+    summary: 'Bot no Telegram que distribui e acompanha as tarefas da equipe sem ninguém sair do chat.',
+    highlights: ['Controle de acesso por papéis: administradores criam e atribuem, integrantes recebem e atualizam.'],
     stack: ['Python', 'python-telegram-bot', 'SQLite', 'RBAC'],
   },
   {
     name: 'Fortius Corp',
     area: 'Cliente · Web',
     status: 'live',
-    summary: 'Site institucional de uma empresa de consultoria financeira, primeiro projeto entregue a um cliente.',
-    highlights: [
-      'Levantamento de requisitos direto com o fundador e entrega do site completo.',
-      'Estrutura de captação de leads integrada a um CRM próprio.',
-    ],
+    summary: 'Site institucional de uma consultoria financeira, do levantamento de requisitos à publicação.',
+    highlights: ['Requisitos definidos direto com o fundador, com captação de leads integrada a um CRM próprio.'],
     stack: ['Next.js', 'React', 'TypeScript'],
     links: [{ label: 'fortiuscorp.com.br', href: 'https://fortiuscorp.com.br' }],
   },
@@ -73,12 +87,8 @@ export const projects: Project[] = [
     name: 'Site ATXES Studios',
     area: 'Frontend · Web',
     status: 'live',
-    summary: 'Site institucional multipágina da empresa, com páginas para cada divisão.',
-    highlights: [
-      'Arquitetura de rotas e componentes em React, refatorada de correções pontuais até uma reconstrução completa.',
-      'Animações com Framer Motion e estilos em CSS Modules.',
-      'Deploy na Vercel com domínio próprio configurado.',
-    ],
+    summary: 'Site multipágina da ATXES Studios, com uma área para cada divisão da empresa.',
+    highlights: ['Reconstrução completa da arquitetura de rotas e componentes em React, com deploy na Vercel.'],
     stack: ['React', 'Vite', 'TypeScript', 'Framer Motion', 'Vercel'],
     links: [{ label: 'atxes.com.br', href: 'https://atxes.com.br' }],
   },
@@ -86,15 +96,14 @@ export const projects: Project[] = [
     name: 'Wake Line',
     area: 'Jogo · Direção técnica',
     status: 'wip',
-    summary: 'Jogo narrativo de terror psicológico, com demo planejada para a Steam.',
-    highlights: [
-      'Protótipo jogável feito em Godot 4, hoje em migração para Unity.',
-      'Direção técnica, implementação e organização das sprints de uma equipe de quatro pessoas.',
-    ],
+    summary: 'Jogo narrativo de terror psicológico da ATXES Entertainment, com demo planejada para a Steam.',
+    highlights: ['Direção técnica de uma equipe de quatro pessoas. Protótipo em Godot 4, em migração para Unity.'],
     stack: ['Godot 4', 'Unity', 'C#', 'ClickUp'],
     links: [
-      { label: 'ATXES Entertainment', href: 'https://www.atxes.com.br/entertainment' },
       { label: 'Página do jogo', href: 'https://www.atxes.com.br/entertainment/wake-line' },
+      { label: 'ATXES Entertainment', href: 'https://www.atxes.com.br/entertainment' },
+    ],
+    socials: [
       { label: 'Instagram', href: 'https://www.instagram.com/atxes.entertainment' },
       { label: 'X', href: 'https://x.com/atxesent' },
       { label: 'TikTok', href: 'https://www.tiktok.com/@atxesntertainment' },
@@ -103,36 +112,46 @@ export const projects: Project[] = [
   },
 ]
 
-export const skills: { group: string; items: string[] }[] = [
-  { group: 'Backend', items: ['Node.js · Express', 'Python', 'APIs REST', 'Autenticação, 2FA, RBAC'] },
-  { group: 'Frontend', items: ['React', 'TypeScript', 'Vite · Next.js', 'Framer Motion'] },
-  { group: 'Dados', items: ['PostgreSQL', 'SQLite', 'MongoDB'] },
-  { group: 'Ferramentas', items: ['Git · GitHub', 'Vercel', 'Playwright', 'Figma'] },
+export const capabilities = [
+  'Node.js',
+  'Express',
+  'TypeScript',
+  'Python',
+  'APIs REST',
+  '2FA · RBAC',
+  'PostgreSQL',
+  'SQLite',
+  'Cloudflare R2',
+  'React',
+  'Next.js',
+  'Vite',
+  'Playwright',
+  'Vercel',
+  'Git',
+  'Figma',
 ]
 
-export const experience = [
-  {
-    when: 'atual',
-    role: 'Fundador e desenvolvedor',
-    org: 'ATXES Studios',
-    text: 'Desenvolvimento de sistemas para clientes e produtos próprios: APIs, painéis internos, sites e um jogo. Também cuido da organização das sprints e da comunicação com clientes.',
-  },
-  {
-    when: 'dez/2025 – atual',
-    role: 'Estagiário de TI · Service Desk',
-    org: 'Grupo São Roque',
-    text: 'Atendimento de chamados, suporte a hardware, software e redes, administração de usuários no AD e suporte a PDVs e sistemas como Winthor TOTVS.',
-  },
-  {
-    when: 'mar/2024 – jan/2025',
-    role: 'Estagiário de TI',
-    org: 'Câmara Municipal de Feira de Santana',
-    text: 'Suporte técnico a usuários, manutenção de equipamentos e configuração de rede.',
-  },
-  {
-    when: 'formação',
-    role: 'Tecnólogo em Análise e Desenvolvimento de Sistemas',
-    org: 'Faculdade Nobre (Unifan)',
-    text: 'Certificação em Cibersegurança (DIO + Santander) · Inglês e espanhol intermediários.',
-  },
+export interface Job {
+  when: string
+  role: string
+  org: string
+  current?: boolean
+}
+
+export const experience: Job[] = [
+  { when: 'atual', role: 'Fundador e desenvolvedor', org: 'ATXES Studios', current: true },
+  { when: 'dez/2025 – atual', role: 'Estagiário de TI · Service Desk', org: 'Grupo São Roque', current: true },
+  { when: 'mar/2024 – jan/2025', role: 'Estagiário de TI', org: 'Câmara Municipal de Feira de Santana' },
+]
+
+export const education = {
+  course: 'Tecnólogo em ADS',
+  org: 'Faculdade Nobre (Unifan)',
+}
+
+export const cert = { name: 'Cibersegurança', org: 'DIO + Santander' }
+
+export const languages = [
+  { name: 'Inglês', level: 'intermediário' },
+  { name: 'Espanhol', level: 'intermediário' },
 ]

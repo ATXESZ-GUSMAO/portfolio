@@ -1,55 +1,35 @@
-import { useState } from 'react'
-import { contact } from '../data/content.ts'
+import { contact, profile } from '../data/content.ts'
+import { useCopy } from '../hooks/useCopy.ts'
+import { CheckIcon, CopyIcon, SocialIcons } from './Icons.tsx'
 
 export default function Contact() {
-  const [label, setLabel] = useState('Copiar e-mail')
-
-  const copy = async () => {
-    try {
-      await navigator.clipboard.writeText(contact.email)
-      setLabel('E-mail copiado')
-    } catch {
-      const el = document.getElementById('mail')
-      if (el) {
-        const range = document.createRange()
-        range.selectNodeContents(el)
-        const sel = window.getSelection()
-        sel?.removeAllRanges()
-        sel?.addRange(range)
-      }
-      setLabel('Selecionado, use Ctrl+C')
-    }
-    setTimeout(() => setLabel('Copiar e-mail'), 2000)
-  }
-
+  const { status, copy } = useCopy()
   return (
-    <section id="contato">
-      <div className="contact">
-        <div>
-          <h2>Vamos conversar?</h2>
-          <p>
-            Estou aberto a vagas de desenvolvedor júnior, remotas ou presenciais e híbridas no Sul. Estou me mudando para
-            Santa Catarina. Respondo rápido por e-mail ou LinkedIn.
-          </p>
-        </div>
-        <div className="mailbox">
-          <span className="eyebrow">E-mail</span>
-          <span className="mail" id="mail">
-            {contact.email}
+    <section className="section" id="contato" aria-labelledby="contato-title">
+      <div className="container">
+        <div className="contact glass" data-reveal>
+          <div className="contact-glow" aria-hidden="true" />
+          <p className="label">03 — Contato</p>
+          <h2 id="contato-title" className="h2 contact-title">
+            {profile.availability}. <em className="serif">Vamos conversar.</em>
+          </h2>
+          <p className="contact-sub">{profile.workModel}.</p>
+
+          <button type="button" className="email-btn" onClick={() => copy(contact.email)}>
+            <span className="email-text">{contact.email}</span>
+            <span className={`email-ico ${status === 'copied' ? 'is-ok' : ''}`} aria-hidden="true">
+              {status === 'copied' ? <CheckIcon /> : <CopyIcon />}
+            </span>
+            <span className="sr-only">, copiar e-mail</span>
+          </button>
+          <span className="sr-only" role="status" aria-live="polite">
+            {status === 'copied' ? 'E-mail copiado' : status === 'error' ? 'Não foi possível copiar o e-mail' : ''}
           </span>
-          <div className="actions" style={{ marginTop: 0 }}>
-            <button className="btn primary" type="button" onClick={copy}>
-              {label}
-            </button>
-          </div>
-          <div className="links">
-            <a href={contact.linkedin} target="_blank" rel="noopener">
-              LinkedIn ↗
-            </a>
-            <a href={contact.github} target="_blank" rel="noopener">
-              GitHub ↗
-            </a>
-          </div>
+          <a className="text-link mailto" href={`mailto:${contact.email}`}>
+            ou abrir no app de e-mail <span aria-hidden="true">→</span>
+          </a>
+
+          <SocialIcons variant="labeled" className="contact-socials" />
         </div>
       </div>
     </section>
