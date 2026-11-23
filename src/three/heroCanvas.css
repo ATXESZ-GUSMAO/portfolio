@@ -2,10 +2,13 @@
 .hero-canvas {
   position: absolute;
   inset: 0 0 0 auto;
-  width: 60%;
+  /* Starts where the 640px text column ends; the left mask fades the seam. */
+  width: calc(100% - max(0px, (100% - var(--container, 1200px)) / 2) - var(--gutter, 40px) - 600px);
   pointer-events: none;
   overflow: hidden;
   z-index: 0;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 22%);
+  mask-image: linear-gradient(90deg, transparent 0%, #000 22%);
 }
 
 .hero-canvas canvas {
@@ -46,12 +49,18 @@
 }
 .hero-canvas.has-3d .hero-orb { opacity: .18; }
 
-@media (max-width: 760px) {
+/* Tablet and mobile: sphere sits behind the text, very faint. */
+@media (max-width: 1023px) {
   .hero-canvas {
     inset: 0;
     width: 100%;
-    opacity: .45;
+    opacity: .22;
+    -webkit-mask-image: radial-gradient(ellipse 70% 60% at 75% 50%, #000 30%, transparent 80%);
+    mask-image: radial-gradient(ellipse 70% 60% at 75% 50%, #000 30%, transparent 80%);
   }
+}
+@media (max-width: 760px) {
+  .hero-canvas { opacity: .18; }
 }
 
 @media (prefers-reduced-motion: reduce) {

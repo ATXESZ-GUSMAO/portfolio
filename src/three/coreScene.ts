@@ -201,12 +201,12 @@ export function mountCore(canvas: HTMLCanvasElement, opts: CoreOptions): () => v
   scene.add(group)
 
   const coreGeo = sphereGeometry(opts.mobile ? 6000 : 14000, 1.6)
-  const coreMat = makeMaterial(opts.mobile ? 34 : 28, 0.18, 0.45, 1, dpr)
+  const coreMat = makeMaterial(opts.mobile ? 26 : 20, 0.14, 0.22, 0.6, dpr)
   const core = new Points(coreGeo, coreMat)
   group.add(core)
 
   const ringGeo = ringGeometry(1500, 2.4, 0.04)
-  const ringMat = makeMaterial(22, 0.05, 0.25, 0.35, dpr)
+  const ringMat = makeMaterial(16, 0.05, 0.12, 0.22, dpr)
   const ring = new Points(ringGeo, ringMat)
   ring.rotation.x = (72 * Math.PI) / 180
   ring.rotation.z = 0.25
@@ -243,6 +243,10 @@ export function mountCore(canvas: HTMLCanvasElement, opts: CoreOptions): () => v
     const h = Math.max(1, canvas.clientHeight)
     renderer.setSize(w, h, false)
     camera.aspect = w / h
+    // Keep the whole scene (ring radius ~2.45 + noise/repel) inside the canvas with margin.
+    const fit = 2.9
+    const tanHalf = Math.tan(((camera.fov / 2) * Math.PI) / 180)
+    camera.position.z = fit / (tanHalf * Math.min(1, camera.aspect))
     camera.updateProjectionMatrix()
     rect = canvas.getBoundingClientRect()
   }
