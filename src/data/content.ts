@@ -97,8 +97,8 @@ export const projects: Project[] = [
     area: 'Jogo · Direção técnica',
     status: 'wip',
     summary: 'Jogo narrativo de terror psicológico da ATXES Entertainment, com demo planejada para a Steam.',
-    highlights: ['Direção técnica de uma equipe de quatro pessoas. Protótipo em Godot 4, em migração para Unity.'],
-    stack: ['Godot 4', 'Unity', 'C#', 'ClickUp'],
+    highlights: ['Direção técnica de uma equipe de quatro pessoas, com desenvolvimento em Unity.'],
+    stack: ['Unity', 'C#', 'ClickUp'],
     links: [
       { label: 'Página do jogo', href: 'https://www.atxes.com.br/entertainment/wake-line' },
       { label: 'ATXES Entertainment', href: 'https://www.atxes.com.br/entertainment' },
