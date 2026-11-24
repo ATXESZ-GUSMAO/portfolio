@@ -140,7 +140,7 @@ export interface Job {
 
 export const experience: Job[] = [
   { when: 'atual', role: 'Fundador e desenvolvedor', org: 'ATXES Studios', current: true },
-  { when: 'dez/2025 – atual', role: 'Estagiário de TI · Service Desk', org: 'Grupo São Roque', current: true },
+  { when: 'dez/2025 – nov/2026', role: 'Estagiário de TI · Service Desk', org: 'Grupo São Roque' },
   { when: 'mar/2024 – jan/2025', role: 'Estagiário de TI', org: 'Câmara Municipal de Feira de Santana' },
 ]
 
